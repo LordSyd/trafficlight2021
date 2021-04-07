@@ -1,7 +1,7 @@
 package trafficlight.ctrl;
 
 import trafficlight.gui.TrafficLightGui;
-import trafficlight.states.State;
+import trafficlight.states.*;
 
 public class TrafficLightCtrl {
 
@@ -26,7 +26,14 @@ public class TrafficLightCtrl {
     }
 
     private void initStates() {
-        //TODO create the states and set current and previous state
+        greenState = new GreenState(this);
+        redState = new RedState(this);
+        yellowState = new YellowState(this);
+
+        State off = new OffState(this);
+
+        currentState = off;
+        previousState = off;
     }
 
     public State getGreenState() {
@@ -63,5 +70,11 @@ public class TrafficLightCtrl {
 
     public void nextState() {
         //TODO handle GUi request and update GUI
+
+        currentState.nextState();
+        gui.setLight(currentState.getState());
+
+
+
     }
 }

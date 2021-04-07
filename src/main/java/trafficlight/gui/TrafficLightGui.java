@@ -2,6 +2,7 @@ package trafficlight.gui;
 
 import trafficlight.ctrl.TrafficLightCtrl;
 import trafficlight.states.TrafficLightColor;
+import trafficlight.states.YellowState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -84,8 +85,7 @@ public class TrafficLightGui extends JFrame implements ActionListener {
                 return;
             }
              while (isAutoMode) {
-                 //TODO call the controller
-
+                 trafficLightCtrl.nextState();
                 try {
                     if (yellow.isOn) {
                         Thread.sleep(yellowIntervall);
@@ -112,7 +112,12 @@ public class TrafficLightGui extends JFrame implements ActionListener {
         }
     }
 
-    public void setLight(TrafficLightColor trafficLightColor){
+    public void setLight(TrafficLightColor trafficLightColor) {
         //TODO setLight
+        red.turnOn(trafficLightColor == TrafficLightColor.RED);
+        green.turnOn(trafficLightColor == TrafficLightColor.GREEN);
+        yellow.turnOn(trafficLightColor == TrafficLightColor.YELLOW);
     }
+
+
 }
