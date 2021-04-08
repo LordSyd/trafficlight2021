@@ -26,11 +26,11 @@ public class TrafficLightCtrl {
     }
 
     private void initStates() {
-        greenState = StateFactory.makeState("green", this);
-        redState = StateFactory.makeState("red", this);
-        yellowState = StateFactory.makeState("yellow", this);
+        greenState = StateFactory.makeState("green","red", this);
+        redState = StateFactory.makeState("red", "yellow", this);
+        yellowState = StateFactory.makeState("yellow","green", this);
 
-        State off = StateFactory.makeState("off", this);
+        State off = StateFactory.makeState("off","red", this);
 
         currentState = off;
         previousState = off;
