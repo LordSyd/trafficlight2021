@@ -14,7 +14,7 @@ public class TrafficLightTest {
     
     @BeforeEach
     void setup() {
-        ctrl = new TrafficLightCtrl();
+        ctrl = TrafficLightCtrl.getInstance();
     }
 
     @AfterEach
@@ -92,16 +92,29 @@ public class TrafficLightTest {
     @Test
     void testTransition_YellowToGreen(){
         ctrl.setCurrentState(ctrl.getYellowState());
+        ctrl.setPreviousState(ctrl.getRedState());
         ctrl.nextState();
         assertTrue(ctrl.getCurrentState() instanceof GreenState);
+    }
+
+
+    @DisplayName("Tests switching states from yellow to red")
+    @Test
+    void testTransition_YellowToRed(){
+        ctrl.setCurrentState(ctrl.getYellowState());
+        ctrl.setPreviousState(ctrl.getGreenState());
+        ctrl.nextState();
+        assertTrue(ctrl.getCurrentState() instanceof RedState);
     }
 
     @DisplayName("Tests switching states from off to red")
     @Test
     void testTransition_OffToRed(){
+        ctrl = TrafficLightCtrl.getInstance();
         ctrl.nextState();
         assertTrue(ctrl.getCurrentState() instanceof RedState);
     }
+
     @DisplayName("Tests switching states from red to yellow")
     @Test
     void testTransition_RedToYellow(){
@@ -109,12 +122,12 @@ public class TrafficLightTest {
         ctrl.nextState();
         assertTrue(ctrl.getCurrentState() instanceof YellowState);
     }
-    @DisplayName("Tests switching states from green to red")
+    @DisplayName("Tests switching states from green to yellow")
     @Test
-    void testTransition_GreenToRed(){
+    void testTransition_GreenToYellow(){
         ctrl.setCurrentState(ctrl.getGreenState());
         ctrl.nextState();
-        assertTrue(ctrl.getCurrentState() instanceof RedState);
+        assertTrue(ctrl.getCurrentState() instanceof YellowState);
     }
 
     @DisplayName("Tests correct Enum assigned - Red")

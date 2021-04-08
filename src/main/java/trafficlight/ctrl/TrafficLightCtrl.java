@@ -17,8 +17,10 @@ public class TrafficLightCtrl {
 
     private TrafficLightGui gui;
 
+    private static TrafficLightCtrl ctrlInstance = null;
 
-    public TrafficLightCtrl() {
+
+    private TrafficLightCtrl() {
         super();
         initStates();
         gui = new TrafficLightGui(this);
@@ -26,7 +28,7 @@ public class TrafficLightCtrl {
     }
 
     private void initStates() {
-        greenState = StateFactory.makeState("green","red", this);
+        greenState = StateFactory.makeState("green","yellow", this);
         redState = StateFactory.makeState("red", "yellow", this);
         yellowState = StateFactory.makeState("yellow","green", this);
 
@@ -66,6 +68,13 @@ public class TrafficLightCtrl {
 
     public void run() {
         gui.run();
+    }
+
+    public static TrafficLightCtrl getInstance(){
+        if (ctrlInstance == null){
+            ctrlInstance = new TrafficLightCtrl();
+        }
+        return ctrlInstance;
     }
 
     public void nextState() {
