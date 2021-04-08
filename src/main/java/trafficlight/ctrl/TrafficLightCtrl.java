@@ -26,11 +26,11 @@ public class TrafficLightCtrl {
     }
 
     private void initStates() {
-        greenState = new GreenState(this);
-        redState = new RedState(this);
-        yellowState = new YellowState(this);
+        greenState = StateFactory.makeState("green", this);
+        redState = StateFactory.makeState("red", this);
+        yellowState = StateFactory.makeState("yellow", this);
 
-        State off = new OffState(this);
+        State off = StateFactory.makeState("off", this);
 
         currentState = off;
         previousState = off;
@@ -69,12 +69,8 @@ public class TrafficLightCtrl {
     }
 
     public void nextState() {
-        //TODO handle GUi request and update GUI
 
         currentState.nextState();
         gui.setLight(currentState.getState());
-
-
-
     }
 }

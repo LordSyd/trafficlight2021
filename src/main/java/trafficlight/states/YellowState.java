@@ -2,23 +2,16 @@ package trafficlight.states;
 
 import trafficlight.ctrl.TrafficLightCtrl;
 
-public class YellowState implements State {
-    private TrafficLightCtrl ctrl;
+public class YellowState extends StateTemplate {
 
-    public YellowState(TrafficLightCtrl assignedCtrl) {
-        this.ctrl = assignedCtrl;
+    public YellowState(TrafficLightCtrl ctrl){
+        setCtrl(ctrl);
+        setColor(TrafficLightColor.YELLOW);
     }
 
     @Override
     public void nextState() {
         ctrl.setPreviousState(ctrl.getCurrentState());
-
         ctrl.setCurrentState(ctrl.getGreenState());
-
-    }
-
-    @Override
-    public TrafficLightColor getState() {
-        return TrafficLightColor.YELLOW;
     }
 }
