@@ -8,6 +8,14 @@ public abstract class StateTemplate implements State {
     protected TrafficLightColor color;
     protected String nextAssignedState;
 
+    public TrafficLightColor getColor() {
+        return color;
+    }
+
+    public String getNextAssignedState() {
+        return nextAssignedState;
+    }
+
     public void setNextAssignedState(String nextAssignedState) {
         this.nextAssignedState = nextAssignedState;
     }
@@ -22,6 +30,7 @@ public abstract class StateTemplate implements State {
 
     public void nextState(){
         State stateToAssign = null;
+
         if (nextAssignedState.equalsIgnoreCase("red")){
             stateToAssign = ctrl.getRedState();
         }else if (nextAssignedState.equalsIgnoreCase("yellow")){

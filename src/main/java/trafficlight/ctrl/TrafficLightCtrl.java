@@ -69,7 +69,6 @@ public class TrafficLightCtrl {
     }
 
     public void nextState() {
-
         currentState.nextState();
         gui.setLight(currentState.getState());
     }
